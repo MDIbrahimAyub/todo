@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+
+    <!-- Internal CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: 250px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 300px;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Todo List</h1>
+
+    <!-- Input Form -->
+    <form id="task-form">
+        <input type="text" id="task-input" placeholder="Enter your task..." required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <!-- Unordered List to Show Tasks -->
+    <ul id="task-list"></ul>
+
+    <!-- Internal JavaScript -->
+    <script>
+        // Select the form, input, and the task list
+        const taskForm = document.getElementById('task-form');
+        const taskInput = document.getElementById('task-input');
+        const taskList = document.getElementById('task-list');
+
+        // Empty array to store tasks
+        let tasks = [];
+
+        // Add event listener to form submission
+        taskForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting and refreshing the page
+
+            // Get the input value
+            const task = taskInput.value;
+
+            // Push the input value into the tasks array
+            tasks.push(task);
+
+            // Clear the input field after submission
+            taskInput.value = '';
+
+            // Call the function to update the task list on the screen
+            displayTasks();
+        });
+
+        // Function to display tasks
+        function displayTasks() {
+            // Clear the current list
+            taskList.innerHTML = '';
+
+            // Loop through tasks and create an `li` for each task
+            tasks.forEach(function(task) {
+                let li = `<li>${task}</li>`;
+                taskList.innerHTML += li;
+            });
+        }
+    </script>
+
+</body>
+</html>
